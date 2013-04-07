@@ -1,5 +1,9 @@
 package keccak;
 
+// Specification: http://keccak.noekeon.org/Keccak-specifications.pdf
+// Implementation by: Sander Demeester
+// Keccak designers:
+// Guido Bertoni1, Joan Daemen1, Michaël Peeters2 and Gilles Van Assche1
 public class Keccak {
 
 	private static final long[] roundConstant = {
@@ -13,6 +17,34 @@ public class Keccak {
 	
 	// start from (0,0) and run to (4,4) seq
 	private static final int[] rotatinOffset = {0, 1, 62, 28, 27, 36, 44, 6, 55, 20, 3, 10, 43, 25, 39, 41, 45, 15, 21, 8, 18, 2, 61, 56, 14};
+	
+	private static final int numberOfRounds = 24;
+	private static final int permutationSize = 1600; // as specified by NIST for permutation function.
+	
+	private int capacity;
+	private int rate;
+	
+	// A round consists of 5 different fases, eg: theta, rho, pi, chi and iota
+	
+	private void theta(){
+		
+	}
+	
+	private void rho(){
+		
+	}
+	
+	private void pi(){
+		
+	}
+	
+	private void chi(){
+		
+	}
+	
+	private void iota(int round){ // to index RC[i_r]
+		
+	}
 	
 	public void init(int lenInBit){
 		
