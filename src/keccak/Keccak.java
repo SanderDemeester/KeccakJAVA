@@ -17,12 +17,17 @@ public class Keccak {
 	
 	// start from (0,0) and run to (4,4) seq
 	private static final int[] rotatinOffset = {0, 1, 62, 28, 27, 36, 44, 6, 55, 20, 3, 10, 43, 25, 39, 41, 45, 15, 21, 8, 18, 2, 61, 56, 14};
+	private byte[] state = new byte[permutationSize/8];
+	private byte[] dataQueue = new byte[maxRate];
 	
 	private static final int numberOfRounds = 24;
 	private static final int permutationSize = 1600; // as specified by NIST for permutation function.
+	private static final int maxRate = 1152; // 1600 - 448
 	
 	private int capacity;
 	private int rate;
+	private int lenInBit;
+	private int queueSize;
 	
 	// A round consists of 5 different fases, eg: theta, rho, pi, chi and iota
 	
@@ -46,7 +51,37 @@ public class Keccak {
 		
 	}
 	
-	public void init(int lenInBit){
+	private void padding(){
 		
+	}
+	
+	public void init(int lenInBit){
+
+		// capacity value
+		// for giving capacity "c", the claim is that the security would be 2^{c/2}
+		if(lenInBit == 0){
+			capacity = 576;
+		}else if(lenInBit == 244){
+			capacity = 448;
+		}else if(lenInBit == 384){
+			capacity = 767;
+		}else if(lenInBit == 512){
+			capacity = 1024;
+		}else{
+			return;
+		}
+		
+		rate = permutationSize - capacity;
+		this.lenInBit = lenInBit;
+		
+		for(int i = 0; i < state.length; i++)     state[i]     = 0;
+		for(int i = 0; i < dataQueue.length; i++) dataQueue[i] = 0;
+	}
+	
+	public byte[] gethash(byte[] input){
+		// Step1: Initialization and padding
+		padding();
+		
+		return null;
 	}
 }
